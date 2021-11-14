@@ -1,6 +1,29 @@
-import { ADD_USER, ADD_USER_ERROR, ADD_USER_SUCCESS, DELETE_USER_ERROR, DELETE_USER_SUCCESS, FETCH_USER_ERROR, FETCH_USER_LOADING, FETCH_USER_SUCCESS, UPDATE_USER } from "../types/userTypes";
+import { ADD_USER, ADD_USER_ERROR, ADD_USER_SUCCESS, DELETE_USER, DELETE_USER_ERROR, DELETE_USER_SUCCESS, FETCH_USER_ERROR, FETCH_USER_LOADING, FETCH_USER_SUCCESS, SEARCH_USER, UPDATE_USER } from "../types/userTypes";
 import axios from "axios"
-import userComponent from "../../components/UserComponent";
+
+const userList = [
+    {
+        id: 1,
+        name: "skander",
+        email: "skander@gmail.com"
+    },
+    {
+        id: 2,
+        name: "skander",
+        email: "skander@gmail.com"
+    },
+    {
+        id: 3,
+        name: "skander",
+        email: "skander@gmail.com"
+    },
+    {
+        id: 4,
+        name: "skander",
+        email: "skander@gmail.com"
+    },
+
+]
 
 
 export const addUser = (payload) => ({
@@ -15,6 +38,18 @@ export const updateUser = (id, data) => ({
         data: data
     }
 })
+export const deleteUser = (id) => ({
+    type: DELETE_USER,
+    payload: {
+        id: id
+    }
+})
+
+export const searchUser = (payload) => ({
+    type: SEARCH_USER,
+    payload
+})
+
 export const fetchUserSuccess = (payload) => ({
     type: FETCH_USER_SUCCESS,
     payload
@@ -75,14 +110,14 @@ export const addUserApi = (user) => {
         }
     }
 }
-export const deleteUser = (id) => {
-    return async (dispatch) => {
-        try {
-            const res = await axios.delete('https://jsonplaceholder.typicode.com/users/' + id)
-            console.log(res.data)
-            dispatch(deleteUserSuccess())
-        } catch (err) {
-            dispatch(deleteUserError())
-        }
-    }
-}
+// export const deleteUser = (id) => {
+//     return async (dispatch) => {
+//         try {
+//             const res = await axios.delete('https://jsonplaceholder.typicode.com/users/' + id)
+//             console.log(res.data)
+//             dispatch(deleteUserSuccess())
+//         } catch (err) {
+//             dispatch(deleteUserError())
+//         }
+//     }
+// }

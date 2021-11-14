@@ -1,4 +1,4 @@
-import { ADD_USER, ADD_USER_ERROR, ADD_USER_SUCCESS, FETCH_USER_ERROR, FETCH_USER_LOADING, FETCH_USER_SUCCESS, UPDATE_USER } from "../types/userTypes"
+import { ADD_USER, ADD_USER_ERROR, ADD_USER_SUCCESS, DELETE_USER, FETCH_USER_ERROR, FETCH_USER_LOADING, FETCH_USER_SUCCESS, SEARCH_USER, UPDATE_USER } from "../types/userTypes"
 
 const initialState = {
     listUser: [],
@@ -29,6 +29,18 @@ const userReducer = (state = initialState, { type, payload }) => {
             return { ...state, listUser: [...state.listUser, payload] }
         case ADD_USER_ERROR:
             return { ...state, error: payload }
+        case SEARCH_USER:
+            if (payload === "")
+                return { ...state }
+            const listUserByName = state.listUser.find(user => {
+                return user.name.includes(payload)
+            })
+            return { ...state, listUser: [listUserByName] }
+        case DELETE_USER:
+            const newList = state.listUser.filter(user => {
+                return user.id !== payload.id
+            })
+            return { ...state, listUser: newList }
         default:
             return state
     }

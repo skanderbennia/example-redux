@@ -10,7 +10,7 @@ export default function UserComponent({ id, name, email }) {
         dispatch(deleteUser(id))
     }
     const updateUserHandler = (id, data) => {
-        dispatch(updateUser(id, { name: nameInput, email: emailInput }))
+        dispatch(updateUser(id, { name: data.nameInput, email: data.emailInput }))
     }
     return (
         <div>
